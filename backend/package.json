@@ -1,0 +1,24 @@
+{
+    "name": "express-starter",
+    "module": "index.ts",
+    "type": "module",
+    "scripts": {
+        "dev": "bun run --watch src/index.ts",
+        "migrate": "bun prisma migrate dev --create-only",
+        "generate": "npx prisma generate && npx prisma db push"
+    },
+    "devDependencies": {
+        "@types/errorhandler": "^1.5.1",
+        "@types/express": "^4.17.19",
+        "bun-types": "latest"
+    },
+    "peerDependencies": {
+        "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "@types/cors": "^2.8.15",
+        "cors": "^2.8.5",
+        "errorhandler": "^1.5.1",
+        "express": "^4.18.2"
+    }
+}
