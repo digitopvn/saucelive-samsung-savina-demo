@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "target": "ES2021" /* Specify what JSX code is generated. */,
+        "experimentalDecorators": true /* Enable experimental support for TC39 stage 2 draft decorators. */,
+        "emitDecoratorMetadata": true,
+        "module": "ES2022" /* Specify the root folder within your source files. */,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+        "strict": true,
+        "strictPropertyInitialization": false,
+        "skipLibCheck": true
+    }
+}
