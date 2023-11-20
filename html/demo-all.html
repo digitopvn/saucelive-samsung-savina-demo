@@ -31,8 +31,8 @@
     </head>
 
     <body>
-        <div class="embed-container">
-            <iframe
+        <div id="root" class="embed-container">
+            <!-- <iframe
                 src="https://stage.player.sauceflex.com/broadcast/lksavina-eddeb2a49bc44af3be87d07aa9f343b9?accessToken=ZXlKaGJHY2lPaUpTVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SndZWEowYm1WeVNXUWlPaUp6WVhacGJtRWlMQ0p0WlcxaVpYSkpaQ0k2SWpFaUxDSnVhV05yVG1GdFpTSTZJbVJoYm1kb2RYbHVhQ0lzSW1GblpTSTZJakV3SWl3aVoyVnVaR1Z5SWpvaWJTSXNJbTFsYldKbGNsUjVjR1VpT2lJeElpd2lhV0YwSWpveE56QXdORGM1TmprekxDSmxlSEFpT2pFM01EQTBPRFk0T1ROOS5VR1JkSm4waVNrM1RzSVpkMWxyTHd3ZEdxSGo1N0MwRElpR2Z1V0VZLWNSRUtSMXFDUHlsZE5Uc1paUldzbnRKWDRsWTI1enFqeXZfbmV5Nm5oaXJkR2lNZ1VjcGtycXMtaHR1Zm9BMEJtOUI4REE2RHFpS2JDd3dtODdlU3ZCVHQ2R3NkY1o2N3Y3ZjZwSnVia0xWWXFhSVo5SkVkTUd5VHB6ZlczOF9GR2tNT0pZU2hORWpTYUhiRmptZ3Bqd3RfVlNmRWZST0ZhSTdUVU9yMmxOZUQ5OUc3bXd1VXJLN2Y0UzlQOVRDbFZlOE9KcFdWNHhYZWxZVXJtWDlINW9CQmJaNDl0TXVUcFIwNjlmUEFMbUdudlNGVDU5bTdYaUxrSGlZa3FRRUpVdWVpbUN2dllxM2NqYV9YV3ZvcWEzNlRGcUVTRmgxcFpIZWdnUjIwT3RyZWc="
                 frameborder="0"
                 allowfullscreen=""
@@ -41,7 +41,70 @@
                 oallowfullscreen="true"
                 msallowfullscreen="true"
                 title=""
-            ></iframe>
+            ></iframe> -->
         </div>
+        <script type="text/javascript">
+            let data = {
+                memberId: "1",
+                nickName: "danghuynh",
+                age: "10",
+                gender: "m",
+                memberType: "1",
+                partnerId: "savina",
+            };
+            fetch("https://stage.api.sauceflex.com/V1/internal/token", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+                .then((res) => res.json())
+                .then((out) => {
+                    console.log(`🚀out----->`, out);
+                    if (out.code == "SU0000") {
+                        let accessToken = out.response.accessToken;
+                        let src = `https://stage.player.sauceflex.com/broadcast/lksavina-eddeb2a49bc44af3be87d07aa9f343b9?accessToken=${accessToken}`;
+                        let iframe = document.createElement("iframe");
+                        iframe.frameBorder = "0";
+                        iframe.allowfullscreen = "";
+                        iframe.webkitallowfullscreen = "true";
+                        iframe.mozallowfullscreen = "true";
+                        iframe.oallowfullscreen = "true";
+                        iframe.msallowfullscreen = "true";
+                        iframe.title = "";
+                        iframe.src = src;
+                        let element = document.getElementById("root");
+                        element.append(iframe);
+                    } else {
+                        let iframe = document.createElement("iframe");
+                        iframe.frameBorder = "0";
+                        iframe.allowfullscreen = "";
+                        iframe.webkitallowfullscreen = "true";
+                        iframe.mozallowfullscreen = "true";
+                        iframe.oallowfullscreen = "true";
+                        iframe.msallowfullscreen = "true";
+                        iframe.title = "";
+                        iframe.src =
+                            "https://stage.player.sauceflex.com/broadcast/lksavina-eddeb2a49bc44af3be87d07aa9f343b9?";
+                        let element = document.getElementById("root");
+                        element.append(iframe);
+                    }
+                })
+                .catch(() => {
+                    let iframe = document.createElement("iframe");
+                    iframe.frameBorder = "0";
+                    iframe.allowfullscreen = "";
+                    iframe.webkitallowfullscreen = "true";
+                    iframe.mozallowfullscreen = "true";
+                    iframe.oallowfullscreen = "true";
+                    iframe.msallowfullscreen = "true";
+                    iframe.title = "";
+                    iframe.src =
+                        "https://stage.player.sauceflex.com/broadcast/lksavina-eddeb2a49bc44af3be87d07aa9f343b9?";
+                    let element = document.getElementById("root");
+                    element.append(iframe);
+                });
+        </script>
     </body>
 </html>
