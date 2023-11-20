@@ -6,6 +6,7 @@
         "emitDecoratorMetadata": true,
         "module": "ES2022" /* Specify the root folder within your source files. */,
         "moduleResolution": "node",
+        "types": ["bun-types"],
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
         "strict": true,
