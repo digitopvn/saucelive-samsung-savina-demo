@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  sauce-samsung-sample:
+    container_name: sauce-samsung-sample
+    build: .
+    ports:
+      - 8000:80
+    volumes:
+      - ./html:/usr/share/nginx/html
