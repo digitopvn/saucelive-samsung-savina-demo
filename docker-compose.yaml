@@ -4,6 +4,7 @@ services:
   sauce-samsung-sample:
     container_name: sauce-samsung-sample
     build: .
+    restart: unless-stopped
     ports:
       - 8000:80
     volumes:
