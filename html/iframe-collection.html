@@ -64,96 +64,16 @@
 
 	<body>
 		<!-- [TEST] SAMPLE HEADING -->
-		<h1 class="page-title">Sauce Collection Demo for Samsung (using IFRAME)</h1>
+		<h1 class="page-title">Sauce Collection Demo for Samsung (using IFRAME - New tab player)</h1>
 
 		<!-- [REQUIRED] COLLECTION IFRAME -->
 		<div class="collection-wrapper">
 			<iframe
-				src="https://collection.sauceflex.com/index.html?partnerId=SAVINA&broadcast=true&curation=false&curationDetail=true&schedule=true&scheduleType=image&searchBar=false&bridge=true"
+				src="https://collection.sauceflex.com/index.html?partnerId=SAVINA&broadcast=true&curation=false&curationDetail=true&schedule=true&scheduleType=image&searchBar=false&broadcastOpenLink=webview,pc,mobile"
 			></iframe>
 		</div>
 
 		<!-- [TEST] Some long content -->
 		<div class="some-long-content">Something else</div>
-
-		<!-- [REQUIRED] SAUCE PLAYER -->
-		<div id="sauce-player" class="embed-container hide">
-			<iframe
-				src="https://player.sauceflex.com/broadcast/vcSAVINA-7b4c84e450694743a4e4f84973ceac49"
-				frameborder="0"
-			></iframe>
-
-			<script type="text/javascript">
-				// hide/show function
-				function hide() {
-					var element = document.getElementById("sauce-player");
-					if (!element.classList.contains("hide")) element.classList.add("hide");
-
-					var iframe = element.getElementsByTagName("iframe")[0];
-					iframe.src = "https://www.samsung.com/vn/samsung-live/";
-				}
-
-				function show() {
-					var element = document.getElementById("sauce-player");
-					element.classList.remove("hide");
-				}
-
-				function play(url) {
-					setTimeout(function () {
-						var player = document.getElementById("sauce-player");
-						var iframe = player.getElementsByTagName("iframe")[0];
-						iframe.src = url;
-					}, 1000);
-					show();
-				}
-
-				// iframe event listeners
-				window.addEventListener(
-					"message",
-					function (e) {
-						try {
-							const data = JSON.parse(e.data);
-							console.log("data.key :>> ", data.key, data.params);
-
-							// Take care of product click
-							/**
-							 * Examples:
-							 * {"key":"sauceflexMoveProduct","params":{"linkUrl":"https://www.samsung.com/vn/smartphones/galaxy-m/galaxy-m14-5g-blue-128gb-sm-m146bzbwxxv/buy/?orderCallBackId=2024-01-savina-4e282b325f29425ead4f4d2715684abc&broadcastId=lksavina-eddeb2a49bc44af3be87d07aa9f343b9&fc=","broadcastIdx":"lksavina-eddeb2a49bc44af3be87d07aa9f343b9","price":"4999999","externalProductId":null}}
-							 */
-							if (data.key === "sauceflexMoveProduct" || data.key === "flexCollectMoveProduct") {
-								// Open product link in new window:
-								window.open(data.params.linkUrl || data.params.productUrl);
-
-								// If you want to open in a current window:
-								// window.open(data.params.linkUrl || data.params.productUrl, "_self");
-							}
-
-							// Take care of banner click
-							if (data.key === "sauceflexMoveBanner" || data.key === "flexCollectMoveTopBanner") {
-								// Open banner link in new window:
-								window.open(data.params.linkUrl || data.params.bannerLinkUrl);
-
-								// If you want to open in a current window:
-								// window.open(data.params.linkUrl || data.params.bannerLinkUrl, "_self");
-							}
-
-							if (data.key === "flexCollectMoveBroadcast") {
-								// broadcastUrl
-								play(data.params.broadcastUrl);
-								// play("https://player.sauceflex.com/broadcast/vcSAVINA-7b4c84e450694743a4e4f84973ceac49");
-							}
-
-							// Take care of close iframe
-							if (data.key === "sauceflexMoveExit") {
-								hide();
-							}
-						} catch (e) {
-							// console.log("e :>> ", e);
-						}
-					},
-					false
-				);
-			</script>
-		</div>
 	</body>
 </html>

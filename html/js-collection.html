@@ -9,161 +9,149 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<style>
+			/* DEFAULT */
 			html,
 			body {
 				margin: 0;
 				padding: 0;
 			}
-			.embed-container {
-				position: fixed;
-				overflow: hidden;
-				width: 100%;
-				height: 100%;
-				top: 0;
-				left: 0;
-			}
-			.embed-container iframe {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-			}
-
-			.collection-wrapper {
-				position: relative;
-				width: 100%;
-				height: 450px;
-			}
-			.collection-wrapper iframe {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				border: none;
-			}
-
-			.hide {
-				display: none;
-			}
 
 			/* SOME LONG CONTENT */
 			.some-long-content {
 				height: 2000px;
+				max-width: 1280px;
+				padding: 20px;
+				margin: auto;
 			}
 			.page-title {
 				padding: 20px;
 				text-align: center;
 			}
+
+			/* [REQUIRED] SAUCE COLLECTION CSS */
+			#sauce-collection {
+				position: relative;
+				width: 100%;
+				max-width: 1280px;
+				margin: auto;
+				overflow-x: auto;
+			}
+			#sauce-collection .collection-wrapper {
+				display: flex;
+				width: fit-content;
+				padding: 20px;
+			}
+			#sauce-collection .collection-wrapper .sauce-thumb {
+				position: relative;
+				width: 15vw;
+				/* height: 31.25vw; */
+				overflow: hidden;
+				margin-right: 1.6666666667vw;
+				cursor: pointer;
+			}
+			@media screen and (max-width: 768px) {
+				#sauce-collection .collection-wrapper .sauce-thumb {
+					width: 69.1666666667vw;
+				}
+			}
+			#sauce-collection .collection-wrapper .sauce-thumb .sauce-badge {
+				font-size: 12px;
+				padding: 8px 10px;
+				background-color: rgba(0, 0, 0, 0.8);
+				color: white;
+				border-radius: 50px;
+			}
+			#sauce-collection .collection-wrapper .sauce-thumb .sauce-duration {
+				position: absolute;
+				top: 16px;
+				left: 16px;
+			}
+			#sauce-collection .collection-wrapper .sauce-thumb .sauce-views {
+				position: absolute;
+				top: 16px;
+				right: 16px;
+			}
+			#sauce-collection .collection-wrapper .sauce-thumb img {
+				width: 100%;
+				height: auto;
+				border: 1px solid rgba(0, 0, 0, 0.1);
+				border-radius: 16px;
+				box-sizing: border-box;
+			}
+			#sauce-collection .collection-wrapper .sauce-thumb h4 {
+				margin-block-start: 1em;
+			}
 		</style>
 	</head>
 
 	<body>
-		<!-- SAMPLE HEADING -->
-		<h1 class="page-title">Sauce Demo for Samsung</h1>
+		<!-- Sample Page Title -->
+		<h1 class="page-title">Sauce Demo for Samsung (Collection API)</h1>
 
-		<!-- Collection (scheduled stream & previous broadcasted videos) -->
-		<!-- <div id="sauce_collect"></div>
-		<script src="https://stage.collection.sauceflex.com/static/js/SauceWebLib.js"></script>
-		<script>
-			SauceWebLib({
-				id: "sauce_collect",
-				// stage면 stage accessToken, prod이면 prod accessToken
-				accessToken:
-					"ZXlKaGJHY2lPaUpTVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SndZWEowYm1WeVNXUWlPaUp6WVhacGJtRWlMQ0p0WlcxaVpYSkpaQ0k2SWpFaUxDSnVhV05yVG1GdFpTSTZJbVJoYm1kb2RYbHVhQ0lzSW1GblpTSTZJakV3SWl3aVoyVnVaR1Z5SWpvaWJTSXNJbTFsYldKbGNsUjVjR1VpT2lJeElpd2lhV0YwSWpveE56QXdORGM1TmprekxDSmxlSEFpT2pFM01EQTBPRFk0T1ROOS5VR1JkSm4waVNrM1RzSVpkMWxyTHd3ZEdxSGo1N0MwRElpR2Z1V0VZLWNSRUtSMXFDUHlsZE5Uc1paUldzbnRKWDRsWTI1enFqeXZfbmV5Nm5oaXJkR2lNZ1VjcGtycXMtaHR1Zm9BMEJtOUI4REE2RHFpS2JDd3dtODdlU3ZCVHQ2R3NkY1o2N3Y3ZjZwSnVia0xWWXFhSVo5SkVkTUd5VHB6ZlczOF9GR2tNT0pZU2hORWpTYUhiRmptZ3Bqd3RfVlNmRWZST0ZhSTdUVU9yMmxOZUQ5OUc3bXd1VXJLN2Y0UzlQOVRDbFZlOE9KcFdWNHhYZWxZVXJtWDlINW9CQmJaNDl0TXVUcFIwNjlmUEFMbUdudlNGVDU5bTdYaUxrSGlZa3FRRUpVdWVpbUN2dllxM2NqYV9YV3ZvcWEzNlRGcUVTRmgxcFpIZWdnUjIwT3RyZWc=",
-				partnerId: "savina",
-				searchBar: false,
-			});
-		</script> -->
-
-		<div class="collection-wrapper">
-			<iframe
-				src="https://collection.sauceflex.com/index.html?partnerId=SAVINA&broadcast=true&curation=false&curationDetail=true&schedule=true&scheduleType=image&searchBar=false&bridge=true"
-			></iframe>
-		</div>
+		<!-- [REQUIRED] COLLECTION WRAPPER -->
+		<div id="sauce-collection"><div class="collection-wrapper"></div></div>
 
 		<!-- Some long content -->
-		<div class="some-long-content">abc</div>
-
-		<!-- SAUCE PLAYER -->
-		<div id="sauce-player" class="embed-container hide">
-			<iframe
-				src="https://player.sauceflex.com/broadcast/vcSAVINA-7b4c84e450694743a4e4f84973ceac49"
-				frameborder="0"
-			></iframe>
-
-			<script type="text/javascript">
-				// hide/show function
-				function hide() {
-					var element = document.getElementById("sauce-player");
-					if (!element.classList.contains("hide")) element.classList.add("hide");
-
-					var iframe = element.getElementsByTagName("iframe")[0];
-					iframe.src = "https://www.samsung.com/vn/samsung-live/";
-				}
-
-				function show() {
-					var element = document.getElementById("sauce-player");
-					element.classList.remove("hide");
-				}
-
-				function play(url) {
-					setTimeout(function () {
-						var player = document.getElementById("sauce-player");
-						var iframe = player.getElementsByTagName("iframe")[0];
-						iframe.src = url;
-					}, 1000);
-					show();
-				}
-
-				// iframe event listeners
-				window.addEventListener(
-					"message",
-					function (e) {
-						try {
-							const data = JSON.parse(e.data);
-							console.log("data.key :>> ", data.key, data.params);
-
-							// Take care of product click
-							/**
-							 * Examples:
-							 * {"key":"sauceflexMoveProduct","params":{"linkUrl":"https://www.samsung.com/vn/smartphones/galaxy-m/galaxy-m14-5g-blue-128gb-sm-m146bzbwxxv/buy/?orderCallBackId=2024-01-savina-4e282b325f29425ead4f4d2715684abc&broadcastId=lksavina-eddeb2a49bc44af3be87d07aa9f343b9&fc=","broadcastIdx":"lksavina-eddeb2a49bc44af3be87d07aa9f343b9","price":"4999999","externalProductId":null}}
-							 */
-							if (data.key === "sauceflexMoveProduct" || data.key === "flexCollectMoveProduct") {
-								// Open product link in new window:
-								window.open(data.params.linkUrl || data.params.productUrl);
-
-								// If you want to open in a current window:
-								// window.open(data.params.linkUrl || data.params.productUrl, "_self");
-							}
-
-							// Take care of banner click
-							if (data.key === "sauceflexMoveBanner" || data.key === "flexCollectMoveTopBanner") {
-								// Open banner link in new window:
-								window.open(data.params.linkUrl || data.params.bannerLinkUrl);
-
-								// If you want to open in a current window:
-								// window.open(data.params.linkUrl || data.params.bannerLinkUrl, "_self");
-							}
-
-							if (data.key === "flexCollectMoveBroadcast") {
-								// broadcastUrl
-								play(data.params.broadcastUrl);
-								// play("https://player.sauceflex.com/broadcast/vcSAVINA-7b4c84e450694743a4e4f84973ceac49");
-							}
-
-							// Take care of close iframe
-							if (data.key === "sauceflexMoveExit") {
-								hide();
-							}
-						} catch (e) {
-							// console.log("e :>> ", e);
-						}
-					},
-					false
-				);
-			</script>
+		<hr />
+		<div class="some-long-content">
+			<h3>Section</h3>
+			<div>Something else</div>
 		</div>
+
+		<!-- [REQUIRED] JavaScript -->
+		<script type="text/javascript">
+			fetch("https://api.sauceflex.com/V1/front/broadcast?partnerId=SAVINA", {
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					console.log(`data ----->`, data);
+					if (data.code == "SU0000") {
+						// display video thumbnails
+						var collection = document.getElementById("sauce-collection");
+						var wrapper = collection.getElementsByClassName("collection-wrapper")[0];
+
+						var list = data.response.items || [];
+						list.map((item) => {
+							var thumb = document.createElement("div");
+							thumb.className = "sauce-thumb";
+							wrapper.append(thumb);
+
+							// statistics (duration, views)
+							var duration = document.createElement("span");
+							duration.className = "sauce-badge sauce-duration";
+							duration.textContent = item.previewInfo.endTime;
+							thumb.append(duration);
+
+							var viewCount = document.createElement("span");
+							viewCount.className = "sauce-badge sauce-views";
+							viewCount.textContent = item.room.incomingCounterInfo + " views";
+							thumb.append(viewCount);
+
+							// click on thumb
+							thumb.addEventListener("click", function (e) {
+								window.open(item.shortUrl); // new tab
+							});
+
+							var image = document.createElement("img");
+							image.src = item.broadcastThumbnailList[0].thumbnailUrl;
+							image.draggable = false;
+							image.alt = item.broadcastName;
+							thumb.append(image);
+
+							var title = document.createElement("h4");
+							title.textContent = item.broadcastName;
+							thumb.append(title);
+						});
+					} else {
+						// display error message
+					}
+				})
+				.catch((e) => {
+					console.error(e);
+				});
+		</script>
 	</body>
 </html>
