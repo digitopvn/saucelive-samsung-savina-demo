@@ -1,0 +1,157 @@
+<!doctype html>
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Demo Sauce & Samsung - Sauce clips</title>
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<style>
+			/* DEFAULT */
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+			}
+
+			/* SOME LONG CONTENT */
+			.some-long-content {
+				height: 2000px;
+				max-width: 1280px;
+				padding: 20px;
+				margin: auto;
+			}
+			.page-title {
+				padding: 20px;
+				text-align: center;
+			}
+
+			/* [REQUIRED] SAUCE COLLECTION CSS */
+			#sauce-collection {
+				position: relative;
+				width: 100%;
+				max-width: 1280px;
+				margin: auto;
+				overflow-x: auto;
+			}
+			#sauce-collection .collection-wrapper {
+				display: flex;
+				width: fit-content;
+				padding: 20px;
+			}
+			#sauce-collection .collection-wrapper .sauce-thumb {
+				position: relative;
+				width: 15vw;
+				/* height: 31.25vw; */
+				overflow: hidden;
+				margin-right: 1.6666666667vw;
+				cursor: pointer;
+			}
+			@media screen and (max-width: 768px) {
+				#sauce-collection .collection-wrapper .sauce-thumb {
+					width: 69.1666666667vw;
+				}
+			}
+			#sauce-collection .collection-wrapper .sauce-thumb .sauce-badge {
+				font-size: 12px;
+				padding: 8px 10px;
+				background-color: rgba(0, 0, 0, 0.8);
+				color: white;
+				border-radius: 50px;
+			}
+			#sauce-collection .collection-wrapper .sauce-thumb .sauce-duration {
+				position: absolute;
+				top: 16px;
+				left: 16px;
+			}
+			#sauce-collection .collection-wrapper .sauce-thumb .sauce-views {
+				position: absolute;
+				top: 16px;
+				right: 16px;
+			}
+			#sauce-collection .collection-wrapper .sauce-thumb img {
+				width: 100%;
+				height: auto;
+				border: 1px solid rgba(0, 0, 0, 0.1);
+				border-radius: 16px;
+				box-sizing: border-box;
+			}
+			#sauce-collection .collection-wrapper .sauce-thumb h4 {
+				margin-block-start: 1em;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Sample Page Title -->
+		<h1 class="page-title">Sauce Demo for Samsung (Sauce Clips)</h1>
+
+		<!-- [REQUIRED] COLLECTION WRAPPER -->
+		<div id="sauce-collection"><div class="collection-wrapper"></div></div>
+
+		<!-- Some long content -->
+		<hr />
+		<div class="some-long-content">
+			<h3>Section</h3>
+			<div>Something else</div>
+		</div>
+
+		<!-- [REQUIRED] JavaScript -->
+		<script type="text/javascript">
+			fetch("https://api.sauceflex.com/V1/front/broadcast?partnerId=SAVINA", {
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					console.log(`data ----->`, data);
+					if (data.code == "SU0000") {
+						// display video thumbnails
+						var collection = document.getElementById("sauce-collection");
+						var wrapper = collection.getElementsByClassName("collection-wrapper")[0];
+
+						var list = data.response.items || [];
+						list.map((item) => {
+							var thumb = document.createElement("div");
+							thumb.className = "sauce-thumb";
+							wrapper.append(thumb);
+
+							// statistics (duration, views)
+							var duration = document.createElement("span");
+							duration.className = "sauce-badge sauce-duration";
+							duration.textContent = item.previewInfo.endTime;
+							thumb.append(duration);
+
+							var viewCount = document.createElement("span");
+							viewCount.className = "sauce-badge sauce-views";
+							viewCount.textContent = item.room.incomingCounterInfo + " views";
+							thumb.append(viewCount);
+
+							// click on thumb
+							thumb.addEventListener("click", function (e) {
+								window.open(item.shortUrl); // new tab
+							});
+
+							var image = document.createElement("img");
+							image.src = item.broadcastThumbnailList[0].thumbnailUrl;
+							image.draggable = false;
+							image.alt = item.broadcastName;
+							thumb.append(image);
+
+							var title = document.createElement("h4");
+							title.textContent = item.broadcastName;
+							thumb.append(title);
+						});
+					} else {
+						// display error message
+					}
+				})
+				.catch((e) => {
+					console.error(e);
+				});
+		</script>
+	</body>
+</html>
