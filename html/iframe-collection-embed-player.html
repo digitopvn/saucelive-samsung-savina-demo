@@ -112,7 +112,7 @@
 					"message",
 					function (e) {
 						try {
-							const data = JSON.parse(e.data);
+							var data = JSON.parse(e.data);
 							console.log("data.key :>> ", data.key, data.params);
 
 							// Take care of product click
