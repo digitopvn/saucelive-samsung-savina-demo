@@ -35,6 +35,15 @@
         margin: 0;
         padding: 0;
       }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
       .video-js {
         background-color: transparent !important;
       }
@@ -73,7 +82,11 @@
       .slick-vertical .slick-arrow.btn-next {
         top: calc(100% - 40px);
         position: absolute;
+
         transform: translate(-50%, -50%) rotate(90deg);
+        animation: fadeIn 3s ease forwards;
+        animation-delay: 1s;
+        opacity: 0;
       }
 
       .slick-vertical .title-video {
@@ -141,6 +154,9 @@
 
         position: absolute;
         transform: translate(-50%, -50%) rotate(90deg);
+        opacity: 0;
+        animation: fadeIn 3s ease forwards;
+        animation-delay: 1s;
       }
 
       .close-btn {
@@ -150,6 +166,9 @@
         z-index: 100;
         color: white;
         cursor: pointer;
+        animation: fadeIn 3s ease forwards;
+        animation-delay: 1s;
+        opacity: 0;
       }
 
       .slick-arrow {
@@ -495,7 +514,7 @@
         // $(".slick-vertical .slick-arrow.btn-pre").remove("hidden");
         // $(".slick-vertical .slick-arrow.btn-next").remove("hidden");
         // $(".popup .close-btn").remove("hidden");
-      }, 500);
+      }, 1000);
 
       // checkPositionBtn();
 
