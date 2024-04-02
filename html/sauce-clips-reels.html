@@ -63,8 +63,7 @@
     (async () => {
       const response = await fetch("https://api.sauceclip.com/player/partner/14/clips");
       const reels = await response.json();
-      console.log("reels", [...reels.data.current, ...reels.data.next]);
-      [...reels.data.current, ...reels.data.next].map((reel, i) => {
+      [...reels.data.current, ...reels.data.next]?.map((reel, i) => {
         console.log("reel", reel);
         const block = document.createElement("div");
         const itemContainer = document.createElement("div");
@@ -112,24 +111,24 @@
 
           window.addEventListener("message", (e) => {
             // console.log(JSON.parse(e.data));
-            try {
-              const data = JSON.parse(e.data);
-              if (data.key === "sauceclipMoveExit") {
-                console.log("exit");
-                bodyTag.removeChild(popup);
-              }
-
-              if (data.key === "sauceclipOnShare") {
-                if (data.params.linkUrl) {
-                  console.log(data.params.linkUrl);
-                  navigator.clipboard.writeText(data.params.linkUrl);
+            if (event.origin.toString() === "https://player.sauceclip.com") {
+              try {
+                const data = JSON.parse(e.data);
+                if (data.key === "sauceclipMoveExit") {
+                  bodyTag.removeChild(popup);
                 }
-              }
 
-              if (data.key === "sauceclipMoveProduct") {
-                window.open(data.params.linkUrl || data.params.productUrl);
-              }
-            } catch (error) {}
+                if (data.key === "sauceclipOnShare") {
+                  if (data.params.linkUrl) {
+                    navigator.clipboard.writeText(data.params.linkUrl);
+                  }
+                }
+
+                if (data.key === "sauceclipMoveProduct") {
+                  window.open(data.params.linkUrl || data.params.productUrl);
+                }
+              } catch (error) {}
+            }
           });
         };
       });
