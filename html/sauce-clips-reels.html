@@ -240,7 +240,7 @@
       <div>
         <div class="rounded-[10px] w-full h-full overflow-hidden">
           <div onclick="handleClick()" class="relative video-container">
-            <video id="my-video10" class="video-js" muted data-setup='{"autoplay": true}' preload="auto">
+            <video id="my-video4" class="video-js" muted data-setup='{"autoplay": true}' preload="auto">
               <source src="https://resources.sauceclip.com/2024/3/27/media/ZEtNpywT/master.m3u8" type="application/x-mpegURL" />
             </video>
             <div class="title-video"></div>
@@ -251,7 +251,7 @@
       <div>
         <div class="rounded-[10px] w-full h-full overflow-hidden">
           <div onclick="handleClick()" class="relative video-container">
-            <video id="my-video10" class="video-js" muted data-setup='{"autoplay": true}' preload="auto">
+            <video id="my-video5" class="video-js" muted data-setup='{"autoplay": true}' preload="auto">
               <source src="https://resources.sauceclip.com/2024/3/27/media/ZEtNpywT/master.m3u8" type="application/x-mpegURL" />
             </video>
             <div class="title-video"></div>
@@ -262,7 +262,7 @@
       <div>
         <div class="rounded-[10px] w-full h-full overflow-hidden">
           <div onclick="handleClick()" class="relative video-container">
-            <video id="my-video10" class="video-js" muted data-setup='{"autoplay": true}' preload="auto">
+            <video id="my-video6" class="video-js" muted data-setup='{"autoplay": true}' preload="auto">
               <source src="https://resources.sauceclip.com/2024/3/27/media/ZEtNpywT/master.m3u8" type="application/x-mpegURL" />
             </video>
             <div class="title-video"></div>
@@ -273,7 +273,7 @@
       <div>
         <div class="rounded-[10px] w-full h-full overflow-hidden">
           <div onclick="handleClick()" class="relative video-container">
-            <video id="my-video10" class="video-js" muted data-setup='{"autoplay": true}' preload="auto">
+            <video id="my-video7" class="video-js" muted data-setup='{"autoplay": true}' preload="auto">
               <source src="https://resources.sauceclip.com/2024/3/27/media/ZEtNpywT/master.m3u8" type="application/x-mpegURL" />
             </video>
             <div class="title-video"></div>
@@ -284,7 +284,7 @@
       <div>
         <div class="rounded-[10px] w-full h-full overflow-hidden">
           <div onclick="handleClick()" class="relative video-container">
-            <video id="my-video10" class="video-js" muted data-setup='{"autoplay": true}' preload="auto">
+            <video id="my-video8" class="video-js" muted data-setup='{"autoplay": true}' preload="auto">
               <source src="https://resources.sauceclip.com/2024/3/27/media/ZEtNpywT/master.m3u8" type="application/x-mpegURL" />
             </video>
             <div class="title-video"></div>
@@ -295,7 +295,7 @@
       <div>
         <div class="rounded-[10px] w-full h-full overflow-hidden">
           <div onclick="handleClick()" class="relative video-container">
-            <video id="my-video10" class="video-js" muted data-setup='{"autoplay": true}' preload="auto">
+            <video id="my-video9" class="video-js" muted data-setup='{"autoplay": true}' preload="auto">
               <source src="https://resources.sauceclip.com/2024/3/27/media/ZEtNpywT/master.m3u8" type="application/x-mpegURL" />
             </video>
             <div class="title-video"></div>
@@ -400,7 +400,6 @@
     for (let i = 0; i < listTitleVid.length; i++) {
       listTitleVid[i].textContent = "Sauce Clip Reel";
     }
-    let preSlide = 0;
     function handleClick() {
       const bodyTag = document.querySelector("body");
       const slickVertical = document.createElement("div");
@@ -417,7 +416,7 @@
         const item = document.createElement("div");
         item.setAttribute("class", "relative flex items-center justify-center w-full h-full");
         const videoJs = document.createElement("video-js");
-        videoJs.setAttribute("class", "video-js");
+        // videoJs.setAttribute("class", "video-js");
         videoJs.setAttribute("data-setup", "{}");
 
         videoJs.setAttribute("preload", "auto");
@@ -461,24 +460,42 @@
         ],
       });
       $(".slick-vertical").on("afterChange", function (slick, currentSlide) {
-        if (currentSlide.currentSlide === preSlide) return;
-        const newPlayer = document.getElementById(`vid${currentSlide.currentSlide}`);
+        // console.log("currentSlide", currentSlide);
+        const newPlayer = videojs(document.getElementById(`vid${currentSlide.currentSlide}`)) || videojs(`vid${currentSlide.currentSlide}`, {});
 
-        videojs(newPlayer).play();
-        if (currentSlide.currentDirection === 0) {
-          const prePlayer = document.getElementById(`vid${+currentSlide.currentSlide - 1}`);
-          videojs(prePlayer)?.pause();
-        } else if (currentSlide.currentDirection === 1) {
-          const prePlayer = document.getElementById(`vid${+currentSlide.currentSlide + 1}`);
-          videojs(prePlayer)?.pause();
-        }
+        newPlayer?.play();
+        // if (currentSlide.currentDirection === 0) {
+        //   const prePlayer = videojs(document.getElementById(`vid${+currentSlide.currentSlide - 1}`)) || videojs(`vid${+currentSlide.currentSlide - 1}`, {});
+        //   prePlayer?.pause();
+        // } else if (currentSlide.currentDirection === 1) {
+        //   const prePlayer = document.getElementById(`vid${+currentSlide.currentSlide + 1}`);
+        //   videojs(prePlayer)?.pause();
+        // }
+      });
+      $(".slick-vertical").on("beforeChange", function (slick, currentSlide) {
+        // console.log("currentSlide", currentSlide);
+        const newPlayer = videojs(document.getElementById(`vid${currentSlide.currentSlide}`)) || videojs(`vid${currentSlide.currentSlide}`, {});
 
-        preSlide = currentSlide.currentSlide;
+        newPlayer?.pause();
+        // if (currentSlide.currentDirection === 0) {
+        //   const prePlayer = videojs(document.getElementById(`vid${+currentSlide.currentSlide - 1}`)) || videojs(`vid${+currentSlide.currentSlide - 1}`, {});
+        //   prePlayer?.pause();
+        // } else if (currentSlide.currentDirection === 1) {
+        //   const prePlayer = document.getElementById(`vid${+currentSlide.currentSlide + 1}`);
+        //   videojs(prePlayer)?.pause();
+        // }
       });
 
-      leftPreBtn = (window.innerWidth - document.getElementById("vid0").offsetWidth) / 2 - 70;
-      document.querySelector(".slick-vertical .slick-arrow.btn-pre").style.left = `${leftPreBtn}px`;
-      document.querySelector(".slick-vertical .slick-arrow.btn-next").style.right = `${leftPreBtn - 40}px`;
+      setTimeout(() => {
+        // console.log('document.getElementById("vid0").offsetWidth', document.querySelector("video-js#vid0.vid0-dimensions").getBoundingClientRect());
+        leftPreBtn = (window.innerWidth - document.querySelector("video-js#vid0.vid0-dimensions").getBoundingClientRect().width) / 2;
+        document.querySelector(".slick-vertical .slick-arrow.btn-pre").style.left = `${leftPreBtn}px`;
+        document.querySelector(".slick-vertical .slick-arrow.btn-next").style.right = `${leftPreBtn}px`;
+        document.querySelector(".popup .close-btn").style.right = `${leftPreBtn + 30}px`;
+        // $(".slick-vertical .slick-arrow.btn-pre").remove("hidden");
+        // $(".slick-vertical .slick-arrow.btn-next").remove("hidden");
+        // $(".popup .close-btn").remove("hidden");
+      }, 500);
 
       // checkPositionBtn();
 
@@ -492,7 +509,6 @@
           videojs(`vid${i}`).dispose();
         }
       });
-      document.querySelector(".popup .close-btn").style.right = `${leftPreBtn + 30}px`;
     }
   </script>
 </html>
