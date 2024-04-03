@@ -84,7 +84,6 @@ body {
   display: none !important;
 }
 .slick .slick-slide video {
-  border-radius: 20px;
   position: absolute;
   left: 0;
   top: 0;
@@ -199,6 +198,10 @@ body {
 .video-container {
   aspect-ratio: 200/300;
   scale: 1.15;
+}
+
+.swal-modal {
+  vertical-align: top;
 }
 
 @keyframes fadeIn {
