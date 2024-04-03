@@ -1,23 +1,17 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
+
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo sauce clip reels</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"
-      integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css"
-      integrity="sha512-6lLUdeQ5uheMFbWm3CP271l14RsX1xtx+J5x2yeIDkkiBpeVTNhTqijME7GgRKKi6hCqovwCoBTlRBEC20M8Mg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"
+        integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css"
+        integrity="sha512-6lLUdeQ5uheMFbWm3CP271l14RsX1xtx+J5x2yeIDkkiBpeVTNhTqijME7GgRKKi6hCqovwCoBTlRBEC20M8Mg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/css/style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
@@ -29,168 +23,181 @@
 
     <style></style>
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              clifford: "#da373d",
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: "#da373d",
+                    },
+                },
             },
-          },
-        },
-      };
+        };
     </script>
     <style type="text/tailwindcss">
-      @layer utilities {
+        @layer utilities {
       }
     </style>
-  </head>
+</head>
 
-  <body>
+<body>
     <div id="root" class="embed-container">
-      <h2 class="text-center text-[40px] pb-[25px]">List sauce clip reels</h2>
+        <h2 class="text-center text-[40px] pb-[25px]">List sauce clip reels</h2>
     </div>
     <div class="slick"></div>
-  </body>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-  <!-- <script type="application/json text/javascript" src="slick/slick.min.js"></script> -->
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<!-- <script type="application/json text/javascript" src="slick/slick.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
     integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  ></script>
-  <script type="text/javascript" async>
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" async>
     (async () => {
-      const response = await fetch("https://api.sauceclip.com/player/partner/14/clips");
-      const reels = await response.json();
-      [...reels.data.current, ...reels.data.next]?.map((reel, i) => {
-        //console.log("reel", reel);
-        const block = document.createElement("div");
-        const itemContainer = document.createElement("div");
-        const item = document.createElement("div");
-        const videoJs = document.createElement("video");
-        const source = document.createElement("source");
-        const title = document.createElement("div");
+        const response = await fetch("https://api.sauceclip.com/player/partner/14/clips");
+        const reels = await response.json();
+        $(document).ready(function () {
 
-        itemContainer.setAttribute("class", "rounded-[10px] w-full h-full overflow-hidden");
-        item.setAttribute("class", "relative video-container");
-        // videoJs.setAttribute("class", "video-js");
-        title.setAttribute("class", "title-video");
-        title.textContent = reel.description;
-        title.style.zIndex = "1";
-        videoJs.setAttribute("data-setup", "{}");
-        videoJs.setAttribute("class", "video-js");
-        videoJs.setAttribute("muted", "muted");
-        videoJs.setAttribute("loop", "loop");
-        videoJs.setAttribute("data-setup", '{"autoplay": true}');
-        videoJs.setAttribute("preload", "auto");
-        videoJs.setAttribute("id", `reel-vid${i}`);
-        source.setAttribute("src", `https://resources.sauceclip.com${reel.streamUrl}`);
-        source.setAttribute("type", "application/x-mpegURL");
 
-        document.querySelector(".slick").appendChild(block);
-        block.appendChild(itemContainer);
-        itemContainer.appendChild(item);
-        item.appendChild(title);
-        item.appendChild(videoJs);
-        videoJs.appendChild(source);
+            [...reels.data.current, ...reels.data.next]?.map((reel, i) => {
+                //console.log("reel", reel);
+                const block = document.createElement("div");
+                const itemContainer = document.createElement("div");
+                const item = document.createElement("div");
+                const videoJs = document.createElement("video");
+                const source = document.createElement("source");
+                const title = document.createElement("div");
 
-        videojs(`reel-vid${i}`, {});
+                itemContainer.setAttribute("class", "rounded-[10px] w-full h-full overflow-hidden");
+                item.setAttribute("class", "relative video-container");
+                // videoJs.setAttribute("class", "video-js");
+                title.setAttribute("class", "title-video");
+                title.textContent = reel.description;
+                title.style.zIndex = "1";
+                videoJs.setAttribute("data-setup", "{}");
+                videoJs.setAttribute("class", "video-js");
+                videoJs.setAttribute("muted", "muted");
+                videoJs.setAttribute("loop", "loop");
+                videoJs.setAttribute("data-setup", '{"autoplay": true}');
+                videoJs.setAttribute("preload", "auto");
+                videoJs.setAttribute("id", `reel-vid${i}`);
+                source.setAttribute("src", `https://resources.sauceclip.com${reel.streamUrl}`);
+                source.setAttribute("type", "application/x-mpegURL");
 
-        item.onclick = () => {
-          const bodyTag = document.querySelector("body");
-          const popup = document.createElement("div");
-          popup.className = "popup";
-          bodyTag.appendChild(popup);
+                document.querySelector(".slick").appendChild(block);
+                block.appendChild(itemContainer);
+                itemContainer.appendChild(item);
+                item.appendChild(title);
+                item.appendChild(videoJs);
+                videoJs.appendChild(source);
 
-          const iframe = document.createElement("iframe");
-          iframe.src = `https://player.sauceclip.com/player?partnerId=14&clipId=${reel.id}`;
-          iframe.width = "100%";
-          iframe.height = "100%";
-          popup.appendChild(iframe);
+                videojs(`reel-vid${i}`, {});
 
-          window.addEventListener("message", (e) => {
-            // console.log(JSON.parse(e.data));
-            if (event.origin.toString() === "https://player.sauceclip.com") {
-              try {
-                const data = JSON.parse(e.data);
-                if (data.key === "sauceclipMoveExit") {
-                  bodyTag.removeChild(popup);
-                }
+                $(item).on("click", function () {
+                    OnclickVideo(reel)
+                });
 
-                if (data.key === "sauceclipOnShare") {
-                  if (data.params.linkUrl) {
-                    navigator.clipboard.writeText(data.params.linkUrl);
-                    swal({
-                      text: "Copied to clipboard!!!",
-                      timer: 1000,
-                      buttons: false,
-                    });
-                  }
-                }
+                item.addEventListener('touchstart', function () {
+                    OnclickVideo(reel)
+                });
+            });
 
-                if (data.key === "sauceclipMoveProduct") {
-                  window.open(data.params.linkUrl || data.params.productUrl);
-                }
-              } catch (error) {}
+
+            function OnclickVideo(_reel) {
+                console.log("123123123");
+                const bodyTag = document.querySelector("body");
+                const popup = document.createElement("div");
+                popup.className = "popup";
+                bodyTag.appendChild(popup);
+
+                const iframe = document.createElement("iframe");
+                iframe.src = `https://player.sauceclip.com/player?partnerId=14&clipId=${_reel.id}`;
+                iframe.width = "100%";
+                iframe.height = "100%";
+                popup.appendChild(iframe);
+
+                window.addEventListener("message", (e) => {
+                    // console.log(JSON.parse(e.data));
+                    if (event.origin.toString() === "https://player.sauceclip.com") {
+                        try {
+                            const data = JSON.parse(e.data);
+                            if (data.key === "sauceclipMoveExit") {
+                                bodyTag.removeChild(popup);
+                            }
+
+                            if (data.key === "sauceclipOnShare") {
+                                if (data.params.linkUrl) {
+                                    navigator.clipboard.writeText(data.params.linkUrl);
+                                    swal({
+                                        text: "Copied to clipboard!!!",
+                                        timer: 1000,
+                                        buttons: false,
+                                    });
+                                }
+                            }
+
+                            if (data.key === "sauceclipMoveProduct") {
+                                window.open(data.params.linkUrl || data.params.productUrl);
+                            }
+                        } catch (error) { }
+                    }
+                });
             }
-          });
-        };
-      });
 
-      $(".slick").slick({
-        infinite: false,
-        slidesToShow: 7,
-        slidesToScroll: 2,
-        // autoplay: true,
-        // autoplaySpeed: 3000,
-        arrows: true,
-        swipeToSlide: true,
-        edgeFriction: 0.1,
-        speed: 500,
-        mobileFirst: true,
-        prevArrow:
-          '<div class="btn-pre"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M20 40C8.9543 40 -2.7141e-06 31.0457 -1.74846e-06 20C-7.8281e-07 8.9543 8.95431 -2.7141e-06 20 -1.74846e-06C31.0457 -7.8281e-07 40 8.9543 40 20C40 31.0457 31.0457 40 20 40ZM16.1206 13.5198C15.7554 13.1055 15.1632 13.1055 14.798 13.5198L9.58704 19.4308C9.22182 19.8451 9.22182 20.5168 9.58704 20.931L14.798 26.8421C15.1632 27.2563 15.7554 27.2563 16.1206 26.8421C16.4858 26.4278 16.4858 25.7561 16.1206 25.3418L12.4912 21.2248L29.6865 21.2248C30.2388 21.2248 30.6865 20.7771 30.6865 20.2248C30.6865 19.6725 30.2388 19.2248 29.6865 19.2248L12.4138 19.2248L16.1206 15.02C16.4858 14.6057 16.4858 13.934 16.1206 13.5198Z" fill="#7C8B9C"/></svg></div>',
-        nextArrow:
-          '<div class="btn-next"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M20 3.49691e-06C31.0457 5.4282e-06 40 8.95431 40 20C40 31.0457 31.0457 40 20 40C8.9543 40 1.56562e-06 31.0457 3.49691e-06 20C5.4282e-06 8.95431 8.95431 1.56562e-06 20 3.49691e-06ZM23.8794 26.4802C24.2446 26.8945 24.8368 26.8945 25.202 26.4802L30.413 20.5692C30.7782 20.1549 30.7782 19.4833 30.413 19.069L25.202 13.1579C24.8368 12.7437 24.2446 12.7437 23.8794 13.1579C23.5142 13.5722 23.5142 14.2439 23.8794 14.6582L27.5088 18.7752L10.3135 18.7752C9.7612 18.7752 9.31348 19.2229 9.31348 19.7752C9.31348 20.3275 9.76119 20.7752 10.3135 20.7752L27.5862 20.7752L23.8794 24.98C23.5142 25.3943 23.5142 26.066 23.8794 26.4802Z" fill="#7C8B9C"/></svg></div>',
-        responsive: [
-          {
-            breakpoint: 1536,
-            settings: {
-              slidesToShow: 7,
-              slidesToScroll: 1,
-            },
-          },
-          {
-            breakpoint: 1366,
-            settings: {
-              slidesToShow: 6,
-              slidesToScroll: 1,
-            },
-          },
+            $(".slick").slick({
+                infinite: false,
+                slidesToShow: 7,
+                slidesToScroll: 2,
+                // autoplay: true,
+                // autoplaySpeed: 3000,
+                arrows: true,
+                swipeToSlide: true,
+                edgeFriction: 0.1,
+                speed: 500,
+                prevArrow:
+                    '<div class="btn-pre"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M20 40C8.9543 40 -2.7141e-06 31.0457 -1.74846e-06 20C-7.8281e-07 8.9543 8.95431 -2.7141e-06 20 -1.74846e-06C31.0457 -7.8281e-07 40 8.9543 40 20C40 31.0457 31.0457 40 20 40ZM16.1206 13.5198C15.7554 13.1055 15.1632 13.1055 14.798 13.5198L9.58704 19.4308C9.22182 19.8451 9.22182 20.5168 9.58704 20.931L14.798 26.8421C15.1632 27.2563 15.7554 27.2563 16.1206 26.8421C16.4858 26.4278 16.4858 25.7561 16.1206 25.3418L12.4912 21.2248L29.6865 21.2248C30.2388 21.2248 30.6865 20.7771 30.6865 20.2248C30.6865 19.6725 30.2388 19.2248 29.6865 19.2248L12.4138 19.2248L16.1206 15.02C16.4858 14.6057 16.4858 13.934 16.1206 13.5198Z" fill="#7C8B9C"/></svg></div>',
+                nextArrow:
+                    '<div class="btn-next"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M20 3.49691e-06C31.0457 5.4282e-06 40 8.95431 40 20C40 31.0457 31.0457 40 20 40C8.9543 40 1.56562e-06 31.0457 3.49691e-06 20C5.4282e-06 8.95431 8.95431 1.56562e-06 20 3.49691e-06ZM23.8794 26.4802C24.2446 26.8945 24.8368 26.8945 25.202 26.4802L30.413 20.5692C30.7782 20.1549 30.7782 19.4833 30.413 19.069L25.202 13.1579C24.8368 12.7437 24.2446 12.7437 23.8794 13.1579C23.5142 13.5722 23.5142 14.2439 23.8794 14.6582L27.5088 18.7752L10.3135 18.7752C9.7612 18.7752 9.31348 19.2229 9.31348 19.7752C9.31348 20.3275 9.76119 20.7752 10.3135 20.7752L27.5862 20.7752L23.8794 24.98C23.5142 25.3943 23.5142 26.066 23.8794 26.4802Z" fill="#7C8B9C"/></svg></div>',
+                responsive: [
+                    {
+                        breakpoint: 1536,
+                        settings: {
+                            slidesToShow: 7,
+                            slidesToScroll: 1,
+                        },
+                    },
+                    {
+                        breakpoint: 1366,
+                        settings: {
+                            slidesToShow: 6,
+                            slidesToScroll: 1,
+                        },
+                    },
 
-          {
-            breakpoint: 1024,
-            settings: {
-              // arrows: false,
-              slidesToShow: 4,
-              slidesToScroll: 1,
-            },
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              // arrows: false,
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            // arrows: false,
+                            slidesToShow: 4,
+                            slidesToScroll: 1,
+                        },
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            // arrows: false,
 
-              slidesToShow: 3,
-              slidesToScroll: 1,
-            },
-          },
-        ],
-      });
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                        },
+                    },
+                ],
+            });
 
-      // return movies;
+        });
+
+
+        // return movies;
     })();
-  </script>
+</script>
+
 </html>
