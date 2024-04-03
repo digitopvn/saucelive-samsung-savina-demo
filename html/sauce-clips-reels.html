@@ -65,7 +65,7 @@
       const response = await fetch("https://api.sauceclip.com/player/partner/14/clips");
       const reels = await response.json();
       [...reels.data.current, ...reels.data.next]?.map((reel, i) => {
-        console.log("reel", reel);
+        //console.log("reel", reel);
         const block = document.createElement("div");
         const itemContainer = document.createElement("div");
         const item = document.createElement("div");
