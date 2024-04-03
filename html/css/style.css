@@ -203,6 +203,15 @@ body {
 .swal-modal {
   vertical-align: top;
 }
+.swal-text:last-child {
+  margin-bottom: 10px;
+}
+.swal-text:first-child {
+  margin-top: 10px;
+}
+.swal-text {
+  font-size: 12px;
+}
 
 @keyframes fadeIn {
   0% {
